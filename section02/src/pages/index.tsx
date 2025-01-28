@@ -1,10 +1,24 @@
 import style from "./index.module.css"
 import SearchableLayout from "@/components/Searchable-Layout";
 import {ReactNode} from "react";
+import { InferGetServerSidePropsType } from "next";
 import books from "@/mock/books.json";
 import BookItem from "@/components/BookItem";
 
-export default function Home() {
+// 컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터를 미리 가져와서 전달할 수 있음
+export const getServerSideProps = () => {
+
+    const data = "Hello";
+
+    return {
+        props: {
+            data,
+        },
+    };
+};
+
+export default function Home(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    console.log(props.data)
   return (
     <div className={style.container}>
         <section>
